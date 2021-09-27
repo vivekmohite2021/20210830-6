@@ -1,0 +1,22 @@
+version: "3"
+
+services:
+  mysite:
+    image: linunix/mysite:0.1
+    ports:
+      - "80:80"
+    networks:
+      - sitenet
+    volumes:
+      - mysite:/usr/local/apache2/htdocs/
+    deploy:
+      replicas: 2
+      restart_policy: 
+        condition: on-failure
+        max_attempts: 2
+networks:
+  sitenet:
+
+volumes:
+  mysite:
+    external: true
